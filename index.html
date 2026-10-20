@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#071322" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="PDM Trainer" />
+  <meta name="description" content="Offline training-only aircraft performance reference and selected verified calculations." />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="./assets/icon-192.png" />
+  <link rel="icon" href="./assets/icon-192.png" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>PDM Trainer | Performance Workspace</title>
+</head>
+<body>
+  <div id="appShell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><div class="mark"><span>↗</span></div><div><strong>FLIGHTDATA <span>LAB</span></strong><small>PERFORMANCE WORKSPACE</small></div></div>
+      <div class="side-label">WORKSPACE</div>
+      <nav id="menu" aria-label="Calculator sections">
+        <a href="#overview" data-tab="overview" class="nav-item active"><span class="nav-icon">▦</span>Overview</a>
+        <a href="#atmosphere" data-tab="atmosphere" class="nav-item"><span class="nav-icon">◉</span>Atmosphere & IAS</a>
+        <a href="#winds" data-tab="winds" class="nav-item"><span class="nav-icon">⌁</span>Runway & Wind</a>
+        <a href="#speeds" data-tab="speeds" class="nav-item"><span class="nav-icon">↗</span>Reference Speeds</a>
+        <a href="#engine" data-tab="engine" class="nav-item"><span class="nav-icon">◫</span>Engine Power</a>
+        <a href="#cruise" data-tab="cruise" class="nav-item"><span class="nav-icon">◈</span>Cruise & Fuel</a>
+        <a href="#vertical" data-tab="vertical" class="nav-item"><span class="nav-icon">↕</span>Climb & Descent</a>
+        <a href="#coverage" data-tab="coverage" class="nav-item"><span class="nav-icon">▤</span>Chart Coverage</a>
+      </nav>
+      <div class="side-spacer"></div>
+      <div class="side-card"><span class="glow-dot"></span><strong>Training mode</strong><p>Not certified or approved for aircraft operations.</p></div>
+      <div class="side-bottom"><span>CA-0117B-PD000-02</span><span>Issue 001 · 21 Dec 2022</span></div>
+    </aside>
+    <div class="content-wrap">
+      <header class="topbar"><div class="top-left"><button id="menuButton" class="icon-button mobile-menu" aria-label="Toggle menu">☰</button><span class="breadcrumb">PDM / <strong id="breadcrumbCurrent">Overview</strong></span></div><div class="top-actions"><span id="netStatus" class="net-status"><i></i> READY OFFLINE</span><button id="installBtn" class="small-button hidden">Install app</button><button id="exportBtn" class="icon-button" title="Export current results">↓</button></div></header>
+      <main>
+        <section class="page active" id="page-overview">
+          <div class="page-heading"><div class="eyebrow">PERFORMANCE DATA MODULE · TRAINING</div><h1>Performance, <em>simplified.</em></h1><p>Offline calculations and directly transcribed reference tables from the uploaded Airbus PDM. No guesswork from unread charts.</p></div>
+          <div class="warning-strip"><span>!</span><p><strong>Simulation and study only.</strong> These values are not approved for dispatch, takeoff, landing or any real-flight decision. Several chart-dependent aircraft values are intentionally unavailable.</p></div>
+          <div class="hero-grid"><article class="hero-card hero-primary"><div class="micro">SOURCE DOCUMENT</div><div class="hero-big">502<span> pages</span></div><p>Seven performance chapters, original Issue 001.</p><span class="hero-link">Reference PDF not included in public deployment</span></article><article class="hero-card"><div class="micro">WORKING CALCULATORS</div><div class="hero-big">6<span> modules</span></div><p>ISA, wind, reference speeds, engine tables, cruise/fuel and vertical profiles.</p><button class="inline-link jump" data-goto="atmosphere">Start calculating →</button></article><article class="hero-card"><div class="micro">DATA INTEGRITY</div><div class="hero-big">31<span> ISA rows</span></div><p>Table 1-1 copied from the PDF and linearly interpolated between published altitudes.</p><button class="inline-link jump" data-goto="coverage">View coverage →</button></article></div>
+          <div class="section-title-row"><div><h2>Calculators</h2><p>Choose a module to get started</p></div><span class="subtle-tag">LOCAL · NO ACCOUNT</span></div>
+          <div class="module-grid"><button class="module-tile jump" data-goto="atmosphere"><span class="module-icon teal">◉</span><strong>Atmosphere</strong><small>ISA · pressure · density · EAS/TAS</small><span>↗</span></button><button class="module-tile jump" data-goto="winds"><span class="module-icon orange">⌁</span><strong>Wind & runway</strong><small>Headwind · crosswind · RCR/RFI</small><span>↗</span></button><button class="module-tile jump" data-goto="speeds"><span class="module-icon purple">↗</span><strong>Speed references</strong><small>VAPP · VREF · VFTO · VTO-UP</small><span>↗</span></button><button class="module-tile jump" data-goto="engine"><span class="module-icon blue">◫</span><strong>Engine settings</strong><small>Published power rating table</small><span>↗</span></button><button class="module-tile jump" data-goto="cruise"><span class="module-icon aqua">◈</span><strong>Cruise & fuel</strong><small>Range · endurance · fuel burn</small><span>↗</span></button><button class="module-tile jump" data-goto="vertical"><span class="module-icon plum">↕</span><strong>Climb & descent</strong><small>Time · track miles · gradients</small><span>↗</span></button></div>
+          <div class="info-note"><strong>What makes this different from a full performance computer?</strong><p>Takeoff distances, brake energy limits, accurate aircraft climb rates, landing distances and cruise performance at a chosen power setting all require chart data that has <strong>not</strong> been digitized or validated yet. The app does not fabricate them.</p></div>
+        </section>
+        <section class="page" id="page-atmosphere">
+          <div class="page-heading"><div class="eyebrow">01 / PERFORMANCE DATA</div><h1>Atmosphere <em>& airspeed.</em></h1><p>Exact tabulated ISA values with linear interpolation; density-based EAS/TAS conversion, not aircraft position-error correction.</p></div>
+          <div class="work-grid"><div class="panel"><div class="panel-head"><h2>Atmospheric inputs</h2><span class="source">TABLE 1-1 · PDM 1-16/17</span></div><div class="form-grid"><label>Pressure altitude <span>ft</span><input data-key="altitude" type="number" min="0" max="30000" step="100" value="10000" /></label><label>Outside air temperature <span>°C</span><input data-key="oat" type="number" min="-100" max="80" step="0.5" value="0" /></label><label>Equivalent airspeed <span>KEAS · optional</span><input data-key="eas" type="number" min="0" max="350" step="1" value="186" /></label></div><div class="fineprint">EAS should already account for instrument position and compressibility corrections. This is <strong>not</strong> a direct IAS → TAS calculator. ISA chart domain: 0–30,000 ft.</div></div>
+          <div class="panel result-panel"><div class="panel-head"><h2>Calculated atmosphere</h2><span class="tag">LIVE</span></div><div id="atmosResult" class="result-container" aria-live="polite"></div></div></div>
+          <div class="panel chart-panel"><div class="panel-head"><h2>ISA temperature profile</h2><span class="source">TABLE 1-1 · 0–30,000 FT</span></div><div id="isaGraph" class="graph-container"></div></div>
+          <div class="info-note"><strong>Manual example · PDM 1-20 (PDF page 38)</strong><p>For 23,000 kg, 10,000 ft, 185 KIAS and 0 °C, the source gives 187 KCAS, 186 KEAS, 217 KTAS and 207 kt groundspeed with 10 kt headwind. These are published example outputs, <strong>not</strong> values the app can independently reproduce without the aircraft-specific correction charts.</p></div>
+        </section>
+        <section class="page" id="page-winds">
+          <div class="page-heading"><div class="eyebrow">03 / TAKEOFF</div><h1>Runway <em>& wind.</em></h1><p>Steady wind, gust-enhanced tailwind and crosswind components based on the PDM wind methodology.</p></div>
+          <div class="work-grid"><div class="panel"><div class="panel-head"><h2>Runway conditions</h2><span class="source">PDM 3-2 TO 3-5</span></div><div class="form-grid"><label>Runway magnetic track <span>°</span><input data-key="rw" type="number" min="0" max="360" value="270" /></label><label>Wind FROM direction <span>°</span><input data-key="wd" type="number" min="0" max="360" value="300" /></label><label>Steady wind <span>kt</span><input data-key="ws" type="number" min="0" max="60" value="20" /></label><label>Maximum gust <span>kt</span><input data-key="wg" type="number" min="0" max="60" value="25" /></label><label class="span2">Headwind policy <span>training selection</span><select data-key="policy"><option value="recommended">PDM recommended 50% headwind allowance</option><option value="ignore-headwind">Conservative: no headwind credit</option></select></label><label class="span2">Runway surface <span>reference table</span><select data-key="surface"><option>Dry paved</option><option>Wet paved</option><option>Icy paved</option><option>Hard soil (CBR ≥7)</option><option>Hard grass (CBR ≥7)</option><option>Soft unpaved CBR 6</option><option>Soft unpaved CBR 5</option><option>Soft unpaved CBR 4</option><option>Soft unpaved CBR 3</option><option>Soft unpaved CBR 2</option></select></label></div></div>
+          <div class="panel result-panel"><div class="panel-head"><h2>Wind breakdown</h2><span class="tag">LIVE</span></div><div id="windResult" class="result-container" aria-live="polite"></div></div></div>
+          <div class="info-note"><strong>Important limitation</strong><p>Crosswind-chart rotation-speed recommendations (Figures 3-1 and 3-2) and adjusted runway distances have not been digitized. This panel calculates wind components and shows published RCR/RFI reference values only. No takeoff authorization is implied.</p></div>
+        </section>
+        <section class="page" id="page-speeds">
+          <div class="page-heading"><div class="eyebrow">01 / SPEED DEFINITIONS</div><h1>Reference <em>speeds.</em></h1><p>Calculate relationships explicitly defined in the PDM after entering verified source-chart speeds yourself.</p></div>
+          <div class="work-grid"><div class="panel"><div class="panel-head"><h2>Source-chart inputs</h2><span class="source">PDM 1-3 / 1-4</span></div><div class="form-grid"><label>VSR flaps UP <span>kt</span><input data-key="vsrUp" type="number" min="1" max="300" value="100" /></label><label>VSR flaps LDG <span>kt</span><input data-key="vsrLand" type="number" min="1" max="300" value="75" /></label><label>VMCL <span>kt</span><input data-key="vmcl" type="number" min="1" max="300" value="85" /></label><label>VTH (threshold speed) <span>KIAS</span><input data-key="vth" type="number" min="1" max="300" value="105" /></label><label>VSR flaps T/O <span>kt</span><input data-key="vsrTo" type="number" min="1" max="300" value="90" /></label><label>VMCA <span>kt</span><input data-key="vmca" type="number" min="1" max="300" value="88" /></label><label class="span2">Normal V2 factor <span>1.13–1.18</span><input data-key="v2factor" type="number" min="1.13" max="1.18" step="0.01" value="1.18" /></label></div><div class="fineprint"><strong>Practice inputs only.</strong> The prefilled values are illustrative numbers, NOT extracted aircraft values; substitute manually verified speeds from the charts before interpreting the results.</div></div>
+          <div class="panel result-panel"><div class="panel-head"><h2>Derived speed relationships</h2><span class="tag">LIVE</span></div><div id="speedResult" class="result-container" aria-live="polite"></div></div></div>
+          <div class="info-note"><strong>Not a complete takeoff speed schedule</strong><p>VR, V1, VCEF, VRE, VMCG, actual V2 and any wind/configuration constraints require separate source charts and procedures. The normal V2 candidate here is a teaching demonstration of the stated factor, not an approved V2 selection.</p></div>
+        </section>
+        <section class="page" id="page-engine">
+          <div class="page-heading"><div class="eyebrow">02 / ENGINE DATA</div><h1>Engine <em>power.</em></h1><p>Published settings from PDM Table 2-1, with no extrapolation beyond the stated sea-level conditions.</p></div>
+          <div class="engine-header"><div class="label-stack"><span>ENGINE</span><strong>Pratt & Whitney PW127G</strong></div><div class="label-stack"><span>PROPELLER</span><strong>Hamilton Standard E568F-5</strong></div><div class="label-stack"><span>SOURCE</span><strong>Table 2-1 · PDM 2-2</strong></div></div>
+          <div class="panel"><div class="panel-head"><h2>Maximum power settings at sea level</h2><span class="source">REFERENCE ONLY</span></div><div class="table-overflow"><table><thead><tr><th>Setting</th><th>Bleed</th><th>NP</th><th>Available power</th><th>Temperature condition</th></tr></thead><tbody id="powerRows"></tbody></table></div><div class="fineprint">SHP is published available shaft power under each specified setting and condition; it is not an automatically calculated output for arbitrary pressure altitude or temperature.</div></div>
+          <div class="panel margin-top"><div class="panel-head"><h2>Ram air effect on takeoff torque</h2><span class="source">TABLE 2-2 · PDM 2-4</span></div><div class="table-overflow"><table><thead><tr><th>Airspeed</th><th>Published %TQ increase</th></tr></thead><tbody><tr><td>50 KCAS</td><td>0.5 percentage points</td></tr><tr><td>100 KCAS</td><td>2.0 percentage points</td></tr><tr><td>150 KCAS</td><td>5.0 percentage points</td></tr></tbody></table></div></div>
+        </section>
+        <section class="page" id="page-cruise">
+          <div class="page-heading"><div class="eyebrow">05 / CRUISE</div><h1>Cruise <em>& fuel.</em></h1><p>Range, endurance and fuel-budget arithmetic using manually supplied speed and fuel-flow data.</p></div>
+          <div class="work-grid"><div class="panel"><div class="panel-head"><h2>Flight inputs</h2><span class="source">PDM 1-2 · DEFINITIONS</span></div><div class="form-grid"><label>True airspeed <span>KTAS</span><input data-key="tas" type="number" min="0" max="400" value="220" /></label><label>Headwind (+) / tailwind (−) <span>kt</span><input data-key="hw" type="number" min="-150" max="150" value="10" /></label><label>Fuel flow per engine <span>kg/h</span><input data-key="ff" type="number" min="1" max="2000" value="450" /></label><label>Operating engines <span>number</span><select data-key="engines"><option value="2">2 engines</option><option value="1">1 engine</option></select></label><label>Fuel budget <span>kg</span><input data-key="fuel" type="number" min="0" value="1800" /></label><label>Planned duration <span>min</span><input data-key="dur" type="number" min="0" value="60" /></label><label class="span2">Planned distance <span>NM</span><input data-key="dist" type="number" min="0" value="200" /></label></div><div class="fineprint">Inputs are illustrative defaults, <strong>not PDM cruise-chart outputs</strong>. The app does not choose TAS, maximum-range speed, fuel flow or optimum altitude for you.</div></div>
+          <div class="panel result-panel"><div class="panel-head"><h2>Fuel & distance analysis</h2><span class="tag">LIVE</span></div><div id="cruiseResult" class="result-container" aria-live="polite"></div></div></div>
+        </section>
+        <section class="page" id="page-vertical">
+          <div class="page-heading"><div class="eyebrow">04 & 06 / CLIMB · DESCENT</div><h1>Vertical <em>profile.</em></h1><p>Time, distance and gradient arithmetic from a manually supplied rate and groundspeed.</p></div>
+          <div class="work-grid"><div class="panel"><div class="panel-head"><h2>Profile inputs</h2><span class="source">GENERAL GEOMETRY</span></div><div class="form-grid"><label>Start altitude <span>ft</span><input data-key="startAlt" type="number" value="3000" /></label><label>Target altitude <span>ft</span><input data-key="endAlt" type="number" value="13000" /></label><label>Average vertical rate <span>ft/min, magnitude</span><input data-key="verticalRate" type="number" min="1" value="1000" /></label><label>Average groundspeed <span>kt</span><input data-key="vgs" type="number" min="0" value="180" /></label></div><div class="fineprint">Assumes constant vertical rate and groundspeed. Does NOT derive actual climb capability, descent schedule or ceiling from aircraft performance charts.</div></div>
+          <div class="panel result-panel"><div class="panel-head"><h2>Profile estimate</h2><span class="tag">LIVE</span></div><div id="verticalResult" class="result-container" aria-live="polite"></div></div></div>
+        </section>
+        <section class="page" id="page-coverage">
+          <div class="page-heading"><div class="eyebrow">SOURCE AUDIT</div><h1>Coverage <em>& limitations.</em></h1><p>A transparent record of what the app actually knows and what still requires digitization, interpolation and review.</p></div>
+          <div class="panel"><div class="panel-head"><h2>Section-by-section coverage</h2><span class="source">CA-0117B-PD000-02</span></div><div class="table-overflow"><table><thead><tr><th>Chapter</th><th>Current coverage</th><th>Still missing</th></tr></thead><tbody>
+           <tr><td>1 · Performance data</td><td><span class="status yes">Partial</span> ISA Table 1-1; speed definitions</td><td>IAS/CAS, compressibility/altitude charts, actual stall curves</td></tr>
+           <tr><td>2 · Engine data</td><td><span class="status yes">Partial</span> Power settings; ram-air table</td><td>Torque and fuel-flow charts vs altitude and temperature</td></tr>
+           <tr><td>3 · Takeoff</td><td><span class="status yes">Partial</span> Wind components; RCR/RFI</td><td>MTOW, V-speeds, CFL, ground run and distance, OEI obstacle paths</td></tr>
+           <tr><td>4 · Climb</td><td><span class="status pending">Arithmetic only</span></td><td>Climb charts, rates, time/distance/fuel from aircraft data</td></tr>
+           <tr><td>5 · Cruise</td><td><span class="status pending">Arithmetic only</span> SR and fuel budget</td><td>Cruise tables, optimal speeds, altitude/fuel schedules</td></tr>
+           <tr><td>6 · Descent</td><td><span class="status pending">Arithmetic only</span></td><td>Chart-derived descent schedule and fuel</td></tr>
+           <tr><td>7 · Approach & landing</td><td><span class="status pending">Relationships only</span> VAPP/VREF</td><td>Landing distances, runway corrections, weight/wind charts</td></tr>
+           </tbody></table></div></div>
+          <div class="panel margin-top"><div class="panel-head"><h2>Data provenance</h2></div><div class="source-grid"><div><strong>Publication</strong><span>Airbus FFS PDM, CA-0117B-PD000-02</span></div><div><strong>Issue</strong><span>001 · 21 December 2022</span></div><div><strong>Label</strong><span>ONLY FOR TRAINING</span></div><div><strong>Source extract</strong><span>Not included to avoid publishing the source manual</span></div><div><strong>Table basis</strong><span>Direct transcription of ISA 0–30,000 ft</span></div><div><strong>Interpolation</strong><span>Piecewise linear on tabulated values</span></div></div></div>
+          <div class="info-note"><strong>For a complete aircraft-specific calculator</strong><p>Each chart must be digitized at sufficient resolution, digitization errors quantified, procedures verified, and results independently checked against manual worked examples and applicable approved documentation. Until then, do not use this app as an aircraft performance computer.</p></div>
+        </section>
+      </main>
+      <footer><span>© Training workspace · All calculations local to your device</span><span>UNAPPROVED · NOT FOR FLIGHT</span></footer>
+    </div>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./calc.js"></script>
+  <script src="./isa-data.js"></script>
+  <script src="./app.js" defer></script>
+</body>
+</html>
